@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:quranapp/presentation/auth/register_screen.dart';
 import 'package:quranapp/presentation/auth/widgets/customwidgets.dart';
+import 'package:quranapp/presentation/common/bottom_navigation_screen.dart';
 
 import '../../data/domain/app_strings.dart';
 import '../home/home_screen.dart';
@@ -188,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (ctx)=> RegisterScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (ctx)=> BottomNavigationScreen()));
                           },
                           child: Text(
                             "Register",

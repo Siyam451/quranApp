@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../data/models/surah_model.dart';
+import 'package:quranapp/data/models/surah_with_ayat_model.dart';
 
 class SurahTile extends StatelessWidget {
-  final SurahModel surah;
+  final SurahWithAyahModel surah;
   final VoidCallback onTap;
 
   const SurahTile({
@@ -26,10 +26,10 @@ class SurahTile extends StatelessWidget {
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          "${surah.revelationType} • ${surah.numberOfAyahs} Ayahs",
+            "${surah.revelationType} • ${surah.ayahs.length} Ayahs"
         ),
         trailing: Text(
-          surah.name, // Arabic
+          surah.name,
           style: const TextStyle(fontSize: 16),
         ),
       ),

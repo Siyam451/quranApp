@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quranapp/presentation/auth/login_screen.dart';
+import 'package:quranapp/presentation/auth/splash_screen.dart';
 import 'package:quranapp/presentation/common/bottom_navigation_screen.dart';
-import 'package:quranapp/presentation/providers/surah_provider.dart';
+import 'package:quranapp/presentation/providers/quran_ayat_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => SurahProvider(),
+          create: (_) => QuranAyatProvider()..getquranAyat(),
         ),
       ],
       child: MaterialApp(

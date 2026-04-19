@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/surah_provider.dart';
-import 'widgets/surah_tile.dart';
+import 'package:quranapp/presentation/providers/quran_ayat_provider.dart';
 import '../surah-details/surah-details_screen.dart';
+import 'widgets/surah_tile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,16 +12,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  @override
-  void initState() {
-    super.initState();
-
-    Future.microtask(() {
-      Provider.of<SurahProvider>(context, listen: false)
-          .fetchsurah();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,20 +41,45 @@ class _HomeScreenState extends State<HomeScreen> {
                   colors: [Colors.purple, Colors.deepPurple],
                 ),
               ),
-              child: const Text(
-                "The best of you are those who study the Quran and teach it.",
-                style: TextStyle(color: Colors.white),
+              child: Stack(
+                children: [
+
+                  /// 🌙 Islamic Network Image
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Opacity(
+                      opacity: 0.2,
+                      child: Image.network(
+                        "https://cdn-icons-png.flaticon.com/512/3176/3176293.png",
+                        height: 100,
+                      ),
+                    ),
+                  ),
+
+                  /// 📝 Text
+                  const Padding(
+                    padding: EdgeInsets.only(right: 80),
+                    child: Text(
+                      "The best of you are those who study the Quran and teach it.",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
 
             const SizedBox(height: 20),
 
-            /// 🔥 API DATA
             Expanded(
-              child: Consumer<SurahProvider>(
+              child: Consumer<QuranAyatProvider>(
                 builder: (context, provider, child) {
 
-                  if (provider.surahInprogress) {
+                  if (provider.QuranAyatInprogress) {
                     return const Center(
                         child: CircularProgressIndicator());
                   }
@@ -75,9 +90,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
 
                   return ListView.builder(
-                    itemCount: provider.surah.length,
+                    itemCount: provider.surahs.length,
                     itemBuilder: (context, index) {
-                      final surah = provider.surah[index];
+                      final surah = provider.surahs[index];
 
                       return SurahTile(
                         surah: surah,
