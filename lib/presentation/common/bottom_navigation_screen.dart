@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quranapp/presentation/prayer-time/prayer_time_screen.dart';
 
 import '../home/home_screen.dart';
 
@@ -13,6 +14,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   int _currentindex = 0;
   final List<Widget> _screens = [
     HomeScreen(),
+    PrayerTimeScreen(),
     Placeholder(),
   ];
 
@@ -39,7 +41,12 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
         BottomNavigationBarItem(
           icon: Icon(Icons.shield_moon),
           label: "Azan Time",
-        )
+        ),
+
+             BottomNavigationBarItem(
+               icon: Icon(Icons.clean_hands_outlined),
+               label: "Dua",
+             ),
       ]),
     );
   }
