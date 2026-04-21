@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/prayer_provider.dart';
+import '../../providers/prayer_provider.dart';
 import 'widgets/prayer_tile.dart';
 import 'widgets/next_prayer_card.dart';
 
@@ -73,7 +73,9 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Prayer Time")),
+      appBar: AppBar(
+          backgroundColor: Colors.purple,
+          title: const Text("Prayer Time")),
       body: Consumer<PrayerProvider>(
         builder: (context, provider, child) {
 
@@ -142,6 +144,13 @@ class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
                       PrayerTile("Isha", prayer.timings.isha, Icons.dark_mode, nextPrayer),
                     ],
                   ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(" Note : The Prophet (ﷺ) said: "
+                      "'The first thing a person will be asked about on Judgment Day is his prayer' ",
+                    style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
                 )
               ],
             ),

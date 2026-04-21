@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quranapp/data/models/surah_with_ayat_model.dart';
-import '../../data/models/surah_model.dart';
-import '../providers/quran_ayat_provider.dart';
+import '../../providers/quran_ayat_provider.dart';
 
 class SurahDetailScreen extends StatefulWidget {
   final SurahWithAyahModel surah;
@@ -21,6 +20,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.purple,
         title: Text(widget.surah.englishName),
       ),
       body: Padding(
@@ -61,7 +61,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
               child: Consumer<QuranAyatProvider>(
                 builder: (context, provider, child) {
 
-                  /// ⏳ Loading
+
                   if (provider.QuranAyatInprogress) {
                     return const Center(
                       child: CircularProgressIndicator(),

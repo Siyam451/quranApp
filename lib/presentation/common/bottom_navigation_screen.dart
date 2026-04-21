@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quranapp/presentation/dua/dua_screen.dart';
+import 'package:quranapp/presentation/namaj-types/namaj_types_screen.dart';
 import 'package:quranapp/presentation/prayer-time/prayer_time_screen.dart';
 
 import '../home/home_screen.dart';
@@ -15,7 +17,8 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   final List<Widget> _screens = [
     HomeScreen(),
     PrayerTimeScreen(),
-    Placeholder(),
+    DuaScreen(),
+    NamajTypesScreen(),
   ];
 
   void _onTap(int index){
@@ -46,6 +49,11 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
              BottomNavigationBarItem(
                icon: Icon(Icons.clean_hands_outlined),
                label: "Dua",
+             ),
+
+             BottomNavigationBarItem(
+               icon: Icon(Icons.waves_sharp),
+               label: "Types of Namaj",
              ),
       ]),
     );
