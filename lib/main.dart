@@ -30,6 +30,14 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        builder: (context, child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaleFactor: 1.0, // prevents UI breaking
+            ),
+            child: child!,
+          );
+        },
         theme: ThemeData(
           primarySwatch: Colors.purple,
           fontFamily: 'Poppins',
