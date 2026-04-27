@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quranapp/presentation/dua/dua_screen.dart';
-import 'package:quranapp/presentation/namaj-types/namaj_types_screen.dart';
+import 'package:quranapp/presentation/namaj-types/screens/namaj_types_screen.dart';
 import 'package:quranapp/presentation/prayer-time/prayer_time_screen.dart';
 
 import '../home/home_screen.dart';
@@ -18,7 +18,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
     HomeScreen(),
     PrayerTimeScreen(),
     DuaScreen(),
-    NamajTypesScreen(),
+    TypesOfNamazScreen(),
   ];
 
   void _onTap(int index){
