@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quranapp/presentation/namaj-types/widgets/namaj_tile.dart';
 
+import '../../../data/models/namaj_model.dart';
 import 'details_screen.dart';
 
 
@@ -13,34 +14,81 @@ class TypesOfNamazScreen extends StatefulWidget {
 
 class _TypesOfNamazScreenState extends State<TypesOfNamazScreen> {
 
-  final List<Map<String, dynamic>> namazList = [
-    {
-      "name": "Tahajjud",
-      "subtitle": "Night Prayer • Nafl",
-      "benefit": "Brings you closer to Allah"
-    },
-    {
-      "name": "Salatul Tasbeeh",
-      "subtitle": "Special Prayer",
-      "benefit": "Forgiveness of sins"
-    },
-    {
-      "name": "Istikhara",
-      "subtitle": "Guidance Prayer",
-      "benefit": "Helps in decision making"
-    },
-    {
-      "name": "Duha Prayer",
-      "subtitle": "Forenoon Prayer",
-      "benefit": "Brings barakah in rizq"
-    },
-  ];
+  final List<NamazModel> namazList = [
 
+    NamazModel(
+      name: "Ishraq",
+      steps: [
+        "Pray about 15-20 minutes after sunrise",
+        "Performed in 2 or 4 rakats",
+        "Remain seated in dhikr after Fajr until prayer time",
+      ],
+      benefits: [
+        "Reward of a complete Hajj and Umrah",
+        "Sins are forgiven",
+        "Protection from hellfire",
+      ],
+    ),
+    NamazModel(
+      name: "Duha (Chasht)",
+      steps: [
+        "Pray after the sun has risen high (mid-morning)",
+        "Minimum 2 rakats, can pray up to 12",
+        "Best performed when the heat of the sun is felt",
+      ],
+      benefits: [
+        "Charity on behalf of every joint in your body",
+        "Sufficient for all daily needs",
+        "A palace in Jannah for praying 12 rakats",
+      ],
+    ),
+    NamazModel(
+      name: "Salatul Hajat",
+      steps: [
+        "Perform Wudu thoroughly",
+        "Pray 2 rakats with full concentration",
+        "After Salam, praise Allah and send Salawat on the Prophet",
+        "Make specific dua for your need or problem",
+      ],
+      benefits: [
+        "Seeking divine intervention for specific needs",
+        "Relief from distress or hardship",
+      ],
+    ),
+    NamazModel(
+      name: "Salatul Tawbah",
+      steps: [
+        "Perform fresh Wudu",
+        "Pray 2 rakats of Nafl",
+        "Beg for Allah’s forgiveness with true remorse",
+        "Resolve never to return to the sin",
+      ],
+      benefits: [
+        "Wipes away the sin committed",
+        "Direct path to repentance and mercy",
+      ],
+    ),
+    NamazModel(
+      name: "Salatul Kusuf",
+      steps: [
+        "Performed during a solar or lunar eclipse",
+        "Two rakats with exceptionally long standing and bowing",
+        "Includes two bowings (Ruku) in each rakat",
+        "Prayed in congregation (preferably)",
+      ],
+      benefits: [
+        "Recognition of Allah’s power over the universe",
+        "Sunnah during celestial events",
+      ],
+    ),
+
+
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Types of Namaz"),
+        title: const Text("Types of Namaz",style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.purple,
       ),
 
@@ -91,14 +139,14 @@ class _TypesOfNamazScreenState extends State<TypesOfNamazScreen> {
                       final namaz = namazList[index];
 
                       return NamazTile(
-                        name: namaz['name'],
-                        subtitle: namaz['subtitle'],
+                        name: namaz.name,
+                        subtitle: "Tap to see details", // or create field
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (_) => NamazDetailsScreen(
-                                name: namaz['name'],
+                                namaz: namaz,
                               ),
                             ),
                           );
