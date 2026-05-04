@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quranapp/data/models/surah_with_ayat_model.dart';
+import '../../providers/audio_provider.dart';
 import '../../providers/quran_ayat_provider.dart';
 
 class SurahDetailScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
         child: Column(
           children: [
 
-            /// 🔹 HEADER
+
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
@@ -38,17 +39,43 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                   colors: [Colors.purple, Colors.deepPurple],
                 ),
               ),
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    widget.surah.name,
-                    style: const TextStyle(
-                        color: Colors.white, fontSize: 20),
+
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.surah.name,
+                        style: const TextStyle(
+                            color: Colors.white, fontSize: 20),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        "${widget.surah.revelationType} • ${widget.surah.ayahs.length} verses",
+                        style: const TextStyle(color: Colors.white70),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 5),
-                  Text(
-                    "${widget.surah.revelationType} • ${widget.surah.ayahs.length} verses",
-                    style: const TextStyle(color: Colors.white70),
+
+                  Consumer<AudioProvider>(
+                    builder: (context, audio, _) {
+                      final url =
+                          "https://server8.mp3quran.net/afs/${widget.surah.number.toString().padLeft(3, '0')}.mp3";
+
+                      return IconButton(
+                        icon: Icon(
+                          audio.isPlaying ? Icons.pause : Icons.play_arrow,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          audio.playAudio(url);
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
@@ -56,11 +83,9 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
 
             const SizedBox(height: 20),
 
-            /// 🔥 AYAH LIST FROM PROVIDER
             Expanded(
               child: Consumer<QuranAyatProvider>(
                 builder: (context, provider, child) {
-
 
                   if (provider.QuranAyatInprogress) {
                     return const Center(
@@ -68,18 +93,15 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                     );
                   }
 
-
                   if (provider.errormessage != null) {
                     return Center(
                       child: Text(provider.errormessage!),
                     );
                   }
 
-
                   final ayahs = provider.getAyahsBySurah(
                     widget.surah.number,
                   );
-
 
                   if (ayahs.isEmpty) {
                     return const Center(
@@ -116,7 +138,6 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
 
                               const SizedBox(height: 10),
 
-                              /// Arabic text
                               Text(
                                 ayah.text,
                                 textAlign: TextAlign.right,
