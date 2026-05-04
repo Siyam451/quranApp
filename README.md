@@ -97,7 +97,7 @@ Quran App is a beautifully designed Islamic app that provides essential daily fe
 
 ## 🌟 Future Improvements
 
-* 🔊 Quran Audio
+* 🔊 Quran Audio (added at 05/04/26 )
 * ⭐ Bookmark system
 * 🌙 Dark mode
 * 📍 Qibla direction
