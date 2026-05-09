@@ -60,6 +60,15 @@ Quran App is a beautifully designed Islamic app that provides essential daily fe
 
 ---
 
+### Qibla Screen
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4498ff17-c21c-48cd-9ef6-1a138955c5aa"  width="300" />
+
+</p>
+
+---
+
 ### 📜 Dua Details Screen
 
 <p align="center">
