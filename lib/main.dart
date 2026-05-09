@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:quranapp/presentation/common/bottom_navigation_screen.dart';
+import 'package:quranapp/presentation/common/splash_screen.dart';
 import 'package:quranapp/providers/audio_provider.dart';
 
 import 'package:quranapp/providers/dua_provider.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.purple,
           fontFamily: 'Poppins',
         ),
-        home: const BottomNavigationScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
