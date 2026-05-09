@@ -6,6 +6,7 @@ import 'package:quranapp/providers/audio_provider.dart';
 
 import 'package:quranapp/providers/dua_provider.dart';
 import 'package:quranapp/providers/prayer_provider.dart';
+import 'package:quranapp/providers/qibla_provider.dart';
 import 'package:quranapp/providers/quran_ayat_provider.dart';
 
 void main() {
@@ -32,6 +33,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => AudioProvider(),
         ),
+        
+        ChangeNotifierProvider(create: (_) => QiblaProvider()..checkPermission())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
