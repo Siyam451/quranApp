@@ -27,6 +27,16 @@ Quran App is a beautifully designed Islamic app that provides essential daily fe
 
 ## 📱 Screenshots
 
+### App Logo
+
+<p align="center">
+ <img src="https://github.com/user-attachments/assets/cf5d7765-c794-48f3-8e86-3c05ac56a338" width="300"/>
+
+
+</p>
+
+---
+
 ### 📖 Splash Screen Page
 
 <p align="center">
