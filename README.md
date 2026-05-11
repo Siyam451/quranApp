@@ -106,6 +106,20 @@ Quran App is a beautifully designed Islamic app that provides essential daily fe
 
 ---
 
+## 🎥 Demo Video
+
+<p align="center">
+  <a href="https://drive.google.com/file/d/1p3PGhJjXpTVYMlk5Xm3ZAw8uv3ZCs7kp/view?usp=drive_link" target="_blank">
+    <img src="https://img.shields.io/badge/Watch-Demo%20Video-success?style=for-the-badge&logo=google-drive" />
+  </a>
+</p>
+
+<p align="center">
+  📱 Click the button above to watch the full app demo
+</p>
+
+---
+
 ## 🚀 Features
 
 * 📖 Quran Surah List & Details
