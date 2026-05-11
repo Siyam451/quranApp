@@ -15,7 +15,7 @@ class AudioProvider extends ChangeNotifier {
         await _player.pause();
         _isPlaying = false;
       } else {
-        await _player.stop(); // 🔥 important
+        await _player.stop();
         await _player.play(UrlSource(url));
         _isPlaying = true;
         _currentUrl = url;

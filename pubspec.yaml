@@ -40,6 +40,7 @@ dependencies:
   geolocator: ^14.0.2
   audioplayers: ^5.2.1
   flutter_qiblah: ^3.0.4
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +62,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/quran_image.jpg
+    - assets/images/quran_image-removebg-preview.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -93,3 +94,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/quran_image-removebg-preview.png"
+  min_sdk_android: 21

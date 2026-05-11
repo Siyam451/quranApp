@@ -86,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 ),
                 child: Image.asset(
-                  "assets/images/quran_image.jpg",
+                  "assets/images/quran_image-removebg-preview.png",
                   height: 120,
                 ),
               ),
