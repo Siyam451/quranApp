@@ -22,6 +22,8 @@ Quran App is a beautifully designed Islamic app that provides essential daily fe
 * 🕌 Prayer time
 * 🤲 Daily duas
 * 🌙 Namaz guide
+* 📍 Qibla Finder
+* 🤲 Types of Special Namaj Section
 
 ---
 
@@ -111,6 +113,8 @@ Quran App is a beautifully designed Islamic app that provides essential daily fe
 * 🤲 Dua with Details
 * 🌙 Namaz Guide System
 * 🎨 Clean & Modern UI
+*  📍 Qibla Finder
+* 🤲 Types of Special Namaj Section
 
 ---
 
@@ -119,7 +123,7 @@ Quran App is a beautifully designed Islamic app that provides essential daily fe
 * Flutter
 * Dart
 * Provider
-* REST APIs
+* REST APIs (free demo API From online)
 
 ---
 
@@ -127,7 +131,6 @@ Quran App is a beautifully designed Islamic app that provides essential daily fe
 ## 🌟 Future Improvements
 
 * 🔊 Quran Audio (added in app at 05/04/26 )
-* ⭐ Bookmark system
 * 🌙 Dark mode
 * 📍 Qibla direction (added in app at 09/04/26 )
 
