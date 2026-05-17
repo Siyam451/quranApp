@@ -64,7 +64,7 @@ class _DuaDetailsScreenState extends State<DuaDetailsScreen> {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : duas.isEmpty
-          ? const Center(child: Text("No Dua Found")) // ✅ HERE
+          ? const Center(child: Text("No Dua Found"))
           : ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: duas.length,
@@ -72,6 +72,7 @@ class _DuaDetailsScreenState extends State<DuaDetailsScreen> {
           final item = duas[index];
 
           return Card(
+            color: const Color(0xFF9C27B0),
             margin: const EdgeInsets.only(bottom: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
@@ -83,7 +84,6 @@ class _DuaDetailsScreenState extends State<DuaDetailsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  /// 🔢 Ayah Number (optional)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -97,7 +97,6 @@ class _DuaDetailsScreenState extends State<DuaDetailsScreen> {
 
                   const SizedBox(height: 12),
 
-                  /// 🕌 Arabic Text (TOP)
                   Text(
                     item['ARABIC_TEXT'] ?? "",
                     textDirection: TextDirection.rtl,
@@ -111,7 +110,6 @@ class _DuaDetailsScreenState extends State<DuaDetailsScreen> {
 
                   const SizedBox(height: 14),
 
-                  /// 🌍 Translation (BOTTOM)
                   Text(
                     item['TRANSLATED_TEXT'] ??
                         item['LANGUAGE_ARABIC_TRANSLATED_TEXT'] ??

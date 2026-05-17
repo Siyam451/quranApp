@@ -14,6 +14,7 @@ class SurahTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: const Color(0xFF9C27B0),
       margin: const EdgeInsets.symmetric(vertical: 6),
       child: ListTile(
         onTap: onTap,

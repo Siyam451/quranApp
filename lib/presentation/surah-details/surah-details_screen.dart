@@ -115,6 +115,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                       final ayah = ayahs[index];
 
                       return Card(
+                        color: const Color(0xFF9C27B0),
                         margin: const EdgeInsets.only(bottom: 10),
                         child: Padding(
                           padding: const EdgeInsets.all(12),

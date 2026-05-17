@@ -13,7 +13,7 @@ class PrayerTile extends StatelessWidget {
     final isNext = name == nextPrayer;
 
     return Card(
-      color: isNext ? Colors.purple.shade50 : Colors.white,
+      color: isNext ? Colors.purple : Colors.white,
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: Colors.purple.shade100,
