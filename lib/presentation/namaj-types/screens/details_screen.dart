@@ -17,24 +17,31 @@ class NamazDetailsScreen extends StatelessWidget {
       body: Stack(
         children: [
 
-          /// 🌙 Background Gradient
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFFF3E5F5), Colors.white],
+                colors: [
+
+                  Theme.of(context).brightness ==
+                      Brightness.dark
+                      ? const Color(0xFF121212)
+                      : const Color(0xFFF3E5F5),
+
+                  Theme.of(context)
+                      .scaffoldBackgroundColor,
+                ],
+
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
             ),
           ),
 
-          /// 📦 CONTENT
           Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
 
-                /// 🔹 HEADER CARD
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
@@ -50,7 +57,7 @@ class NamazDetailsScreen extends StatelessWidget {
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          "${namaz.name} Prayer Guide", // ✅ FIXED
+                          "${namaz.name} Prayer Guide",
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -64,29 +71,26 @@ class NamazDetailsScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                /// 📜 DETAILS
                 Expanded(
                   child: ListView(
                     children: [
 
-                      /// 🌟 HOW TO PERFORM
                       _sectionCard(
                         title: "How to Perform",
                         icon: Icons.menu_book,
                         children: namaz.steps
                             .map((step) => _stepItem(step))
-                            .toList(), // ✅ DYNAMIC
+                            .toList(),
                       ),
 
                       const SizedBox(height: 20),
 
-                      /// 🌟 BENEFITS
                       _sectionCard(
                         title: "Benefits",
                         icon: Icons.favorite,
                         children: namaz.benefits
                             .map((b) => _stepItem(b))
-                            .toList(), // ✅ DYNAMIC
+                            .toList(),
                       ),
                     ],
                   ),
@@ -99,7 +103,6 @@ class NamazDetailsScreen extends StatelessWidget {
     );
   }
 
-  /// 🌟 SECTION CARD
   Widget _sectionCard({
     required String title,
     required IconData icon,
@@ -147,7 +150,6 @@ class NamazDetailsScreen extends StatelessWidget {
     );
   }
 
-  /// 🔹 STEP / BULLET ITEM
   Widget _stepItem(String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
@@ -155,7 +157,6 @@ class NamazDetailsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
-          /// ✔ Icon Bullet
           const Icon(
             Icons.check_circle,
             size: 18,

@@ -31,18 +31,24 @@ class QiblaScreen extends StatelessWidget {
         children: [
 
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFFF3E5F5),
-                  Colors.white,
+
+                  Theme.of(context).brightness ==
+                      Brightness.dark
+                      ? const Color(0xFF121212)
+                      : const Color(0xFFF3E5F5),
+
+                  Theme.of(context)
+                      .scaffoldBackgroundColor,
                 ],
+
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
             ),
           ),
-
 
 
           StreamBuilder<QiblahDirection>(

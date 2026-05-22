@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/quran_ayat_provider.dart';
+import '../../providers/theme_provider.dart';
 import '../surah-details/surah-details_screen.dart';
 import 'widgets/surah_tile.dart';
 
@@ -17,6 +18,28 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
+        actions: [
+
+          Consumer<ThemeProvider>(
+            builder: (context, theme, child) {
+
+              return IconButton(
+
+                icon: Icon(
+                  theme.isDark
+                      ? Icons.light_mode
+                      : Icons.dark_mode,
+                ),
+
+                onPressed: () {
+                  theme.toggleTheme();
+                },
+              );
+            },
+          ),
+
+        ],
         backgroundColor: Colors.purple,
         title: const Text("Quran App",style: TextStyle(color: Colors.white),),
       ),
