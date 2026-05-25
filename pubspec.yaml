@@ -41,6 +41,7 @@ dependencies:
   audioplayers: ^5.2.1
   flutter_qiblah: ^3.0.4
   flutter_launcher_icons: ^0.13.1
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:

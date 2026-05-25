@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quranapp/presentation/dua/dua_screen.dart';
+import 'package:quranapp/presentation/mosque/mosque_screen.dart';
 import 'package:quranapp/presentation/namaj-types/screens/namaj_types_screen.dart';
 import 'package:quranapp/presentation/prayer-time/prayer_time_screen.dart';
 import 'package:quranapp/presentation/qibla/screens/qibla_screen.dart';
@@ -20,6 +21,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
     PrayerTimeScreen(),
     QiblaScreen(),
     DuaScreen(),
+    MosqueScreen(),
     TypesOfNamazScreen(),
   ];
 
@@ -56,6 +58,10 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
              BottomNavigationBarItem(
                icon: Icon(Icons.clean_hands_outlined),
                label: "Dua",
+             ),
+             BottomNavigationBarItem(
+               icon: Icon(Icons.search),
+               label: "Find Mosque",
              ),
 
              BottomNavigationBarItem(
