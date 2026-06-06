@@ -1,47 +1,41 @@
 import 'package:flutter/material.dart';
 
-class MosqueCard
-    extends StatelessWidget {
+class MosqueCard extends StatelessWidget {
 
   final String name;
+  final VoidCallback onTap;
 
   const MosqueCard({
     super.key,
     required this.name,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
 
     return Card(
-
       elevation: 0,
 
       child: ListTile(
 
-        leading:
-        const CircleAvatar(
-          backgroundColor:
-          Colors.purple,
+        onTap: onTap,
 
-          child:
-          Icon(
+        leading: const CircleAvatar(
+          backgroundColor: Colors.purple,
+          child: Icon(
             Icons.mosque,
-            color:
-            Colors.white,
+            color: Colors.white,
           ),
         ),
 
-        title:
-        Text(name),
+        title: Text(name),
 
-        subtitle:
-        const Text(
+        subtitle: const Text(
           "Nearby Mosque",
         ),
 
-        trailing:
-        const Icon(
+        trailing: const Icon(
           Icons.arrow_forward_ios,
         ),
       ),
