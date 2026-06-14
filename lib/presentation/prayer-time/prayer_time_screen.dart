@@ -2,279 +2,342 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quranapp/presentation/prayer-time/widgets/prayer_tile.dart';
+import 'package:quranapp/presentation/prayer-time/widgets/quick_action_grid.dart';
 
+import '../../data/services/ajan_services.dart';
 import '../../providers/prayer_provider.dart';
-import 'widgets/prayer_tile.dart';
+import 'widgets/hadith_card.dart';
 import 'widgets/next_prayer_card.dart';
+import 'widgets/prayer_header_card.dart';
+
 
 class PrayerTimeScreen extends StatefulWidget {
   const PrayerTimeScreen({super.key});
 
   @override
-  State<PrayerTimeScreen> createState() => _PrayerTimeScreenState();
+  State<PrayerTimeScreen> createState() =>
+      _PrayerTimeScreenState();
 }
 
-class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
+class _PrayerTimeScreenState
+    extends State<PrayerTimeScreen> {
+
   String nextPrayer = "";
-  Duration remaining = Duration.zero;
+
+  Duration remaining =
+      Duration.zero;
 
   Timer? _timer;
 
-  final AudioPlayer _player = AudioPlayer();
-
-  bool _azanPlayed = false;
+  bool azanPlayed = false;
 
   @override
   void dispose() {
     _timer?.cancel();
-    _player.dispose();
     super.dispose();
   }
 
-  /// Play Azan
-  Future<void> playAzan() async {
-    try {
-      await _player.play(
-        AssetSource('audio/azan.mp3'),
-      );
-    } catch (e) {
-      debugPrint("Azan error: $e");
-    }
-  }
-
-  /// Calculate next prayer
   void calculateNextPrayer(prayer) {
-    final now = DateTime.now();
+
+    final now =
+    DateTime.now();
 
     final times = {
-      "Fajr": prayer.timings.fajr,
-      "Dhuhr": prayer.timings.dhuhr,
-      "Asr": prayer.timings.asr,
-      "Maghrib": prayer.timings.maghrib,
-      "Isha": prayer.timings.isha,
+
+      "Fajr":
+      prayer.timings.fajr,
+
+      "Dhuhr":
+      prayer.timings.dhuhr,
+
+      "Asr":
+      prayer.timings.asr,
+
+      "Maghrib":
+      prayer.timings.maghrib,
+
+      "Isha":
+      prayer.timings.isha,
     };
 
     for (var entry in times.entries) {
-      final parts = entry.value.split(":");
 
-      final prayerTime = DateTime(
+      final parts =
+      entry.value.split(":");
+
+      final prayerTime =
+      DateTime(
+
         now.year,
         now.month,
         now.day,
+
         int.parse(parts[0]),
         int.parse(parts[1]),
       );
 
       if (prayerTime.isAfter(now)) {
-        nextPrayer = entry.key;
 
-        startCountdown(prayerTime);
+        nextPrayer =
+            entry.key;
+
+        startCountdown(
+          prayerTime,
+        );
 
         break;
       }
     }
   }
 
-  /// Countdown timer
-  void startCountdown(DateTime nextTime) {
+  void startCountdown(
+      DateTime nextTime) {
+
     _timer?.cancel();
 
-    _azanPlayed = false;
+    azanPlayed = false;
 
     _timer = Timer.periodic(
-      const Duration(seconds: 1),
+
+      const Duration(
+          seconds: 1),
+
           (_) async {
-        final now = DateTime.now();
 
-        final diff = nextTime.difference(now);
+        final now =
+        DateTime.now();
 
-        /// When prayer time arrives
-        if (diff.inSeconds <= 0 && !_azanPlayed) {
-          _azanPlayed = true;
+        final diff =
+        nextTime.difference(now);
 
-          await playAzan();
+        if (diff.inSeconds <= 0 &&
+            !azanPlayed) {
 
-          final provider = Provider.of<PrayerProvider>(
-            context,
-            listen: false,
-          );
+          azanPlayed = true;
 
-          calculateNextPrayer(
-            provider.prayerTime,
-          );
-
-          return;
+          await AzanService
+              .playAzan();
         }
 
         if (mounted) {
+
           setState(() {
-            remaining = diff;
+
+            remaining =
+                diff;
           });
         }
       },
     );
   }
 
-  /// Format countdown
-  String format(Duration d) {
-    return "${d.inHours.toString().padLeft(2, '0')}:"
-        "${(d.inMinutes % 60).toString().padLeft(2, '0')}:"
-        "${(d.inSeconds % 60).toString().padLeft(2, '0')}";
+  String format(
+      Duration d) {
+
+    return
+      "${d.inHours.toString().padLeft(2, '0')}:"
+          "${(d.inMinutes % 60).toString().padLeft(2, '0')}:"
+          "${(d.inSeconds % 60).toString().padLeft(2, '0')}";
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+      BuildContext context) {
+
     return Scaffold(
+
       appBar: AppBar(
-        backgroundColor: Colors.purple,
-        title: const Text("Prayer Time"),
+
+        backgroundColor:
+        Colors.purple,
+
+        title: const Text(
+          "Prayer Time",
+          style: TextStyle(
+            color:
+            Colors.white,
+          ),
+        ),
       ),
 
-      body: Consumer<PrayerProvider>(
-        builder: (context, provider, child) {
+      body:
+      Consumer<PrayerProvider>(
+
+        builder:
+            (
+            context,
+            provider,
+            child) {
 
           if (provider.isLoading) {
+
             return const Center(
-              child: CircularProgressIndicator(),
+              child:
+              CircularProgressIndicator(),
             );
           }
 
           if (provider.error != null) {
+
             return Center(
-              child: Text(provider.error!),
+              child:
+              Text(
+                provider.error!,
+              ),
             );
           }
 
-          final prayer = provider.prayerTime;
+          final prayer =
+              provider.prayerTime;
 
           if (prayer == null) {
+
             return const Center(
-              child: Text("No data"),
+              child:
+              Text(
+                "No Data",
+              ),
             );
           }
 
-          /// Run only once
           if (nextPrayer.isEmpty) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              calculateNextPrayer(prayer);
-            });
+
+            WidgetsBinding
+                .instance
+                .addPostFrameCallback(
+                  (_) {
+
+                calculateNextPrayer(
+                  prayer,
+                );
+              },
+            );
           }
 
-          return Padding(
-            padding: const EdgeInsets.all(16),
+          return SingleChildScrollView(
+
+            padding:
+            const EdgeInsets.all(
+                16),
 
             child: Column(
+
               children: [
 
-                /// Date Card
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(20),
+                PrayerHeaderCard(
 
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
+                  city:
+                  "Chattogram, Bangladesh",
 
-                    gradient: const LinearGradient(
-                      colors: [
-                        Colors.purple,
-                        Colors.deepPurple,
-                      ],
-                    ),
-                  ),
+                  nextPrayer:
+                  nextPrayer,
 
-                  child: Column(
-                    children: [
-
-                      Text(
-                        prayer.date.readableDate,
-
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
-
-                      const SizedBox(height: 5),
-
-                      Text(
-                        prayer.date.hijriDate,
-
-                        style: const TextStyle(
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ],
+                  countdown:
+                  format(
+                    remaining,
                   ),
                 ),
 
-                const SizedBox(height: 15),
+                const SizedBox(
+                    height: 20),
 
-                /// Next Prayer Card
+                 QuickActionsGrid(
+                  onQibla: () {},
+                  onQuran: () {},
+                  onDua: () {},
+                  onNamaz: () {},
+                ),
+
+                const SizedBox(
+                    height: 20),
+
                 NextPrayerCard(
-                  nextPrayer: nextPrayer,
-                  countdown: format(remaining),
-                ),
 
-                const SizedBox(height: 15),
+                  prayer:
+                  nextPrayer,
 
-                /// Prayer List
-                Expanded(
-                  child: ListView(
-                    children: [
-
-                      PrayerTile(
-                        "Fajr",
-                        prayer.timings.fajr,
-                        Icons.nightlight,
-                        nextPrayer,
-                      ),
-
-                      PrayerTile(
-                        "Dhuhr",
-                        prayer.timings.dhuhr,
-                        Icons.sunny,
-                        nextPrayer,
-                      ),
-
-                      PrayerTile(
-                        "Asr",
-                        prayer.timings.asr,
-                        Icons.cloud,
-                        nextPrayer,
-                      ),
-
-                      PrayerTile(
-                        "Maghrib",
-                        prayer.timings.maghrib,
-                        Icons.nights_stay,
-                        nextPrayer,
-                      ),
-
-                      PrayerTile(
-                        "Isha",
-                        prayer.timings.isha,
-                        Icons.dark_mode,
-                        nextPrayer,
-                      ),
-                    ],
+                  countdown:
+                  format(
+                    remaining,
                   ),
                 ),
 
-                /// Footer Quote
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
+                const SizedBox(
+                    height: 20),
 
-                  child: Text(
-                    "Note : The Prophet (ﷺ) said: "
-                        "'The first thing a person will be asked about on Judgment Day is his prayer'",
+                const HadithCard(),
 
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                const SizedBox(
+                    height: 20),
+
+                PrayerTimeTile(
+
+                  prayer:
+                  "Fajr",
+
+                  time:
+                  prayer.timings.fajr,
+
+                  isNext:
+                  nextPrayer ==
+                      "Fajr",
                 ),
+
+                PrayerTimeTile(
+
+                  prayer:
+                  "Dhuhr",
+
+                  time:
+                  prayer.timings.dhuhr,
+
+                  isNext:
+                  nextPrayer ==
+                      "Dhuhr",
+                ),
+
+                PrayerTimeTile(
+
+                  prayer:
+                  "Asr",
+
+                  time:
+                  prayer.timings.asr,
+
+                  isNext:
+                  nextPrayer ==
+                      "Asr",
+                ),
+
+                PrayerTimeTile(
+
+                  prayer:
+                  "Maghrib",
+
+                  time:
+                  prayer.timings.maghrib,
+
+                  isNext:
+                  nextPrayer ==
+                      "Maghrib",
+                ),
+
+                PrayerTimeTile(
+
+                  prayer:
+                  "Isha",
+
+                  time:
+                  prayer.timings.isha,
+
+                  isNext:
+                  nextPrayer ==
+                      "Isha",
+                ),
+
+                const SizedBox(
+                    height: 20),
               ],
             ),
           );

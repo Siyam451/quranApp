@@ -1,32 +1,50 @@
 import 'package:flutter/material.dart';
 
-class PrayerTile extends StatelessWidget {
-  final String name;
-  final String time;
-  final IconData icon;
-  final String nextPrayer;
+class PrayerTimeTile extends StatelessWidget {
 
-  const PrayerTile(this.name, this.time, this.icon, this.nextPrayer, {super.key});
+  final String prayer;
+  final String time;
+  final bool isNext;
+
+  const PrayerTimeTile({
+    super.key,
+    required this.prayer,
+    required this.time,
+    required this.isNext,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final isNext = name == nextPrayer;
 
     return Card(
-      color: isNext ? Colors.purple : Colors.white,
+
+      color:
+      isNext
+          ? Colors.purple.shade100
+          : null,
+
       child: ListTile(
+
         leading: CircleAvatar(
-          backgroundColor: Colors.purple.shade100,
-          child: Icon(icon, color: Colors.purple),
+          backgroundColor:
+          isNext
+              ? Colors.green
+              : Colors.grey,
+
+          child: const Icon(
+            Icons.access_time,
+            color: Colors.white,
+          ),
         ),
-        title: Text(name),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(time),
-            if (isNext)
-              const Text("Next", style: TextStyle(color: Colors.purple)),
-          ],
+
+        title: Text(prayer),
+
+        trailing: Text(
+          time,
+          style: const TextStyle(
+            fontWeight:
+            FontWeight.bold,
+          ),
         ),
       ),
     );
