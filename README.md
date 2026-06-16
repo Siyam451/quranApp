@@ -70,7 +70,6 @@ Quran App is a beautifully designed Islamic app that provides essential daily fe
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/38371636-47bd-44e0-894a-381020ed12ce" width= "300" />
-" width="300"/>
 </p>
 
 ---
