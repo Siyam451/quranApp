@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quranapp/presentation/prayer-time/sub-screens/tashbeeh_screen.dart';
 import 'package:quranapp/presentation/prayer-time/widgets/prayer_tile.dart';
 import 'package:quranapp/presentation/prayer-time/widgets/quick_action_grid.dart';
 
@@ -242,11 +243,15 @@ class _PrayerTimeScreenState
                 const SizedBox(
                     height: 20),
 
-                 QuickActionsGrid(
-                  onQibla: () {},
-                  onQuran: () {},
-                  onDua: () {},
-                  onNamaz: () {},
+                QuickActionsGrid(
+                  onTasbeeh: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const TasbeehScreen(),
+                      ),
+                    );
+                  },
                 ),
 
                 const SizedBox(

@@ -9,6 +9,7 @@ import 'package:quranapp/providers/mosque_provider.dart';
 import 'package:quranapp/providers/prayer_provider.dart';
 import 'package:quranapp/providers/qibla_provider.dart';
 import 'package:quranapp/providers/quran_ayat_provider.dart';
+import 'package:quranapp/providers/tashbeeh_provider.dart';
 import 'package:quranapp/providers/theme_provider.dart';
 
 void main() {
@@ -45,7 +46,11 @@ class MyApp extends StatelessWidget {
         
         ChangeNotifierProvider(create: (_) => QiblaProvider()..checkPermission(),
 
-        )
+        ),
+
+        ChangeNotifierProvider(
+          create: (_) => TasbeehProvider(),
+        ),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context,themeprovider,_) {
