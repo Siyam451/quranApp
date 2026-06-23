@@ -2,6 +2,9 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quranapp/presentation/prayer-time/sub-screens/daily_dhikr_screen.dart';
+import 'package:quranapp/presentation/prayer-time/sub-screens/hijri_screen.dart';
+import 'package:quranapp/presentation/prayer-time/sub-screens/prayer_streak_screen.dart';
 import 'package:quranapp/presentation/prayer-time/sub-screens/tashbeeh_screen.dart';
 import 'package:quranapp/presentation/prayer-time/widgets/prayer_tile.dart';
 import 'package:quranapp/presentation/prayer-time/widgets/quick_action_grid.dart';
@@ -244,11 +247,47 @@ class _PrayerTimeScreenState
                     height: 20),
 
                 QuickActionsGrid(
+
                   onTasbeeh: () {
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const TasbeehScreen(),
+                        builder: (_) =>
+                        const TasbeehScreen(),
+                      ),
+                    );
+                  },
+
+                  onDhikr: () {
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                        const DailyDhikrScreen(),
+                      ),
+                    );
+                  },
+
+                  onHijri: () {
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                        const HijriScreen(),
+                      ),
+                    );
+                  },
+
+                  onStreak: () {
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                        const PrayerStreakScreen(),
                       ),
                     );
                   },

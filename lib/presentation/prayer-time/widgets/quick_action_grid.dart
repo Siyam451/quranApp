@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 class QuickActionsGrid extends StatelessWidget {
 
   final VoidCallback onTasbeeh;
+  final VoidCallback onDhikr;
+  final VoidCallback onHijri;
+  final VoidCallback onStreak;
 
   const QuickActionsGrid({
     super.key,
     required this.onTasbeeh,
+    required this.onDhikr,
+    required this.onHijri,
+    required this.onStreak,
   });
 
   @override
@@ -26,27 +32,27 @@ class QuickActionsGrid extends StatelessWidget {
       children: [
 
         _item(
-          Icons.explore,
-          "Qibla",
-              () {},
-        ),
-
-        _item(
-          Icons.menu_book,
-          "Quran",
-              () {},
-        ),
-
-        _item(
           Icons.fingerprint,
           "Tasbeeh",
           onTasbeeh,
         ),
 
         _item(
-          Icons.mosque,
-          "Namaz",
-              () {},
+          Icons.auto_awesome,
+          "Dhikr",
+          onDhikr,
+        ),
+
+        _item(
+          Icons.calendar_month,
+          "Hijri",
+          onHijri,
+        ),
+
+        _item(
+          Icons.local_fire_department,
+          "Streak",
+          onStreak,
         ),
       ],
     );
