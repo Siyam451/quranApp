@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:quranapp/presentation/prayer-time/sub-screens/prayer-streak-widget/achievement_card.dart';
+import 'package:quranapp/presentation/prayer-time/sub-screens/prayer-streak-widget/prayer_card.dart';
+import 'package:quranapp/presentation/prayer-time/sub-screens/prayer-streak-widget/streak_header.dart';
+
+import '../../../providers/prayer_streak_provider.dart';
 
 class PrayerStreakScreen extends StatefulWidget {
   const PrayerStreakScreen({super.key});
@@ -44,96 +50,56 @@ class _PrayerStreakScreenState
         padding:
         const EdgeInsets.all(20),
 
-        child: Column(
+        child: Consumer<PrayerStreakProvider>(
+          builder: (context, provider, child) {
 
-          children: [
+            return ListView(
 
-            Container(
+              children: [
 
-              width:
-              double.infinity,
-
-              padding:
-              const EdgeInsets.all(20),
-
-              decoration:
-              BoxDecoration(
-
-                borderRadius:
-                BorderRadius.circular(
-                    20),
-
-                gradient:
-                const LinearGradient(
-                  colors: [
-                    Colors.purple,
-                    Colors.deepPurple,
-                  ],
+                StreakHeader(
+                  streak: provider.streak,
+                  completed: provider.completed,
+                  progress: provider.progress,
                 ),
-              ),
 
-              child: Column(
+                const SizedBox(height: 20),
 
-                children: [
+                ...provider.prayerNames.map((prayer) {
 
-                  Text(
-                    "$completed / 5",
-                    style:
-                    const TextStyle(
-                      color:
-                      Colors.white,
-                      fontSize: 40,
-                      fontWeight:
-                      FontWeight.bold,
-                    ),
-                  ),
+                  return PrayerCard(
 
-                  const Text(
-                    "Today's Progress",
-                    style: TextStyle(
-                      color:
-                      Colors.white70,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                    prayer: prayer,
 
-            const SizedBox(height: 20),
+                    completed:
+                    provider.prayers[prayer]!,
 
-            Expanded(
+                    onChanged: (value) {
 
-              child: ListView(
-
-                children:
-                prayers.keys.map((prayer){
-
-                  return CheckboxListTile(
-
-                    value:
-                    prayers[prayer],
-
-                    title:
-                    Text(prayer),
-
-                    activeColor:
-                    Colors.purple,
-
-                    onChanged:
-                        (value){
-
-                      setState(() {
-
-                        prayers[
-                        prayer] =
-                        value!;
-                      });
+                      provider.togglePrayer(
+                        prayer,
+                        value,
+                      );
                     },
                   );
+
                 }).toList(),
-              ),
-            ),
-          ],
+
+                const SizedBox(height: 20),
+
+                AchievementCard(
+                  streak: provider.streak,
+                ),
+
+                const SizedBox(height: 20),
+
+                // Weekly Progress (next widget)
+
+                // Daily Motivation (next widget)
+
+              ],
+            );
+          },
         ),
       ),
     );
