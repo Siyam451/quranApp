@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:quranapp/presentation/prayer-time/sub-screens/prayer-streak-widget/achievement_card.dart';
 import 'package:quranapp/presentation/prayer-time/sub-screens/prayer-streak-widget/prayer_card.dart';
 import 'package:quranapp/presentation/prayer-time/sub-screens/prayer-streak-widget/streak_header.dart';
+import 'package:quranapp/presentation/prayer-time/sub-screens/prayer-streak-widget/weakly_progress_card.dart';
 
 import '../../../providers/prayer_streak_provider.dart';
 
@@ -94,6 +95,10 @@ class _PrayerStreakScreenState
                 const SizedBox(height: 20),
 
                 // Weekly Progress (next widget)
+
+                WeeklyProgress(
+                  progress: provider.weeklyProgress,
+                ),
 
                 // Daily Motivation (next widget)
 
