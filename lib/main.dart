@@ -5,6 +5,8 @@ import 'package:quranapp/presentation/common/splash_screen.dart';
 import 'package:quranapp/providers/audio_provider.dart';
 
 import 'package:quranapp/providers/dua_provider.dart';
+import 'package:quranapp/providers/hijri_calender_provider.dart';
+import 'package:quranapp/providers/hijri_provider.dart';
 import 'package:quranapp/providers/mosque_provider.dart';
 import 'package:quranapp/providers/prayer_provider.dart';
 import 'package:quranapp/providers/prayer_streak_provider.dart';
@@ -55,6 +57,12 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider(
           create: (_) => PrayerStreakProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_)=>HijriProvider()..loadHijri(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => HijriCalendarProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(
